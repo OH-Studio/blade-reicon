@@ -72,7 +72,7 @@ The solid icons can be referenced like this:
 <x-reicon-s-arrow-left/>
 ```
 
-Icon names follow the slugs on [reicon.dev](https://reicon.dev/), so `https://reicon.dev/icons/search-normal2` becomes `reicon-o-search-normal2`. A few icons have no solid variant.
+Icon names are the names from Reicon's [icon dataset](https://github.com/dqev/reicon/blob/main/data/icon-data.json), so `search-normal2` becomes `reicon-o-search-normal2`. A few names appear in two categories; like Reicon's npm packages, the second one gets the category as a suffix, for example `reicon-o-archive2-newicons`. A few icons have no solid variant.
 
 ### Raw SVG Icons
 
@@ -90,11 +90,10 @@ Then use them in your views like:
 
 ## Updating the icons
 
-The icons are generated from the [`reicon`](https://www.npmjs.com/package/reicon) npm package. A scheduled GitHub workflow opens a pull request whenever a new release changes them. To regenerate them locally:
+The icons are generated from `data/icon-data.json` of the Reicon release named in [`.reicon-version`](.reicon-version). A scheduled GitHub workflow opens a pull request whenever Reicon publishes a new release. To regenerate them locally:
 
 ```bash
-pnpm install
-node bin/export.mjs
+php bin/export.php
 vendor/bin/blade-icons-generate
 ```
 

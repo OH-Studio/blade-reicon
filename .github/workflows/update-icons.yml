@@ -17,34 +17,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Setup Node
-        uses: actions/setup-node@v7
-        with:
-          node-version: lts/*
+      - name: Get versions
+        id: versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "current=$(cat .reicon-version)" >> "$GITHUB_OUTPUT"
+          echo "latest=$(gh release view --repo dqev/reicon --json tagName --jq .tagName)" >> "$GITHUB_OUTPUT"
 
       - name: Setup PHP
+        if: steps.versions.outputs.current != steps.versions.outputs.latest
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.5
           coverage: none
 
-      - name: Install dependencies
-        run: |
-          composer update --prefer-dist --no-interaction --no-progress
-          pnpm install
-
       - name: Generate icons
+        if: steps.versions.outputs.current != steps.versions.outputs.latest
         run: |
-          node bin/export.mjs
+          echo "${{ steps.versions.outputs.latest }}" > .reicon-version
+          composer update --prefer-dist --no-interaction --no-progress
+          php bin/export.php
           vendor/bin/blade-icons-generate
 
       - name: Open pull request
+        if: steps.versions.outputs.current != steps.versions.outputs.latest
         uses: peter-evans/create-pull-request@v8
         with:
           branch: update-icons
-          commit-message: 'feat: update Reicon icons'
-          title: 'feat: update Reicon icons'
-          body: 'Icons regenerated from the latest `reicon` release on npm.'
+          commit-message: 'feat: update to Reicon ${{ steps.versions.outputs.latest }}'
+          title: 'feat: update to Reicon ${{ steps.versions.outputs.latest }}'
+          body: 'Icons regenerated from `data/icon-data.json` of the Reicon `${{ steps.versions.outputs.latest }}` release.'

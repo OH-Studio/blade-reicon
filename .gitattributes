@@ -7,6 +7,6 @@
 /tests export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
-package.json export-ignore
+.reicon-version export-ignore
 phpunit.xml.dist export-ignore
 README.md export-ignore

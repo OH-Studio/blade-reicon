@@ -14,6 +14,10 @@ it('compiles a solid icon', function (): void {
     );
 });
 
+it('keeps the size of clip path rectangles', function (): void {
+    expect(svg('reicon-o-alert-circle2')->toHtml())->toContain('<rect width="24" height="24" fill="currentColor"/>');
+});
+
 it('adds classes to icons', function (): void {
     expect(svg('reicon-o-add', 'w-6 h-6 text-gray-500')->toHtml())->toStartWith(
         '<svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">',

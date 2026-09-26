@@ -1,7 +1,5 @@
 dist/
-node_modules/
 vendor/
 .phpunit.result.cache
 composer.lock
 phpunit.xml
-pnpm-lock.yaml
