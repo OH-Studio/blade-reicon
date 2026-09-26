@@ -1,0 +1,48 @@
+{
+    "name": "ohstudio/blade-reicon",
+    "description": "A package to easily make use of Reicon in your Laravel Blade views.",
+    "keywords": ["Blade", "Reicon", "Laravel"],
+    "homepage": "https://github.com/OH-Studio/blade-reicon",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hubert Tulibacki",
+            "email": "hubert@ohstudio.pl"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "blade-ui-kit/blade-icons": "^1.6",
+        "illuminate/support": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0|^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OHStudio\\BladeReicon\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OHStudio\\BladeReicon\\BladeReiconServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
